@@ -7,6 +7,7 @@ import Context from './context'
 
 import './style.scss'
 
+
 function App() {
 
 
@@ -54,9 +55,18 @@ function App() {
 
     const [city, setCity] = useState([])
 
+    function fetchWeather() {
+        city.map( city => {
+            
+        })
+
+    }
+    
+
     function updateCity(cityName) {
         setCity(city.concat(cityName))
     }
+
     return (
         <Context.Provider>
             <Header addCity={updateCity} />
