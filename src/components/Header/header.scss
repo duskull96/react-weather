@@ -1,0 +1,52 @@
+@import '../../fonts.scss';
+
+
+.header {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    .__title {
+        text-align: center;
+        h1 {
+            font-family: $ffJost;
+            font-weight: 900;
+            font-size: 70px;
+            margin-bottom: 20px;
+            user-select: none;
+        }
+        h3 {
+            margin: 0 0 10px 0;
+            @extend %secondFont
+        }
+    }
+    .__form {
+        form {
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+        }
+        input {
+            height: 40px;
+            width: 500px;
+            padding: 15px;
+            font-family: $ffExo;
+            font-weight: 500;
+            font-size: 30px;
+            text-align: center;
+            outline: none;
+            border: 3px solid $fontColorDark;
+            border-radius: 20px;
+        }
+        button {
+            margin: 20px;
+            height: 45px;
+            width: 250px;
+            background: #fff;
+            outline: none;
+            border: 3px solid $fontColorDark;
+            border-radius: 20px;
+            @extend %secondFont
+        }
+    }
+}

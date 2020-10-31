@@ -1,0 +1,66 @@
+@import '../../fonts.scss';
+
+a {
+    margin: 40px 0 0 0;
+    border-radius: 20px;
+}
+.city {
+    display: flex;
+    flex-flow: row wrap;
+    height: 200px;
+    width: 400px;
+    padding: 20px;
+    margin: 0 0 0 0;
+    .city__title {
+        width: 70%;
+        display: flex;
+        flex-flow: column;
+        align-items: flex-start;
+        justify-content: center;
+        .__name {
+            @extend %cityName;
+        }
+        .__update, .__description {
+            @extend %descrptFont;
+        }
+    }
+    .city__icon {
+        width: 30%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .city__info {
+        width: 100%;
+        font-size: 17px;
+        display: flex;
+        justify-content: space-between;
+        & div {
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            & span {
+                font-size: 22px;
+                @extend %cityName;
+            }
+        }
+        @extend %descrptFont;
+    }
+    @extend %inputStyle;
+}
+
+.choiced-for-delete {
+    animation: choicedForDelete 1s ease 0s infinite;
+}
+
+@keyframes choicedForDelete {
+    0% {
+        transform: rotate(-1deg);
+    }
+    50% {
+        transform: rotate(1deg);
+    }
+    100% {
+        transform: rotate(-1deg);
+    }
+}
