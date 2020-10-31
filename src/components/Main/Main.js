@@ -12,10 +12,10 @@ function Main(props) {
     return (
         <div className='container'>
 
-            {props.city.map((city, index) => {
+            {props.weather.map((weather, index) => {
                 return (
                     <a href='#' key={index} onClick={choicedForDelete}>
-                        <City city={city} />
+                        <City city={weather} />
                     </a>
                 )
             })}
@@ -27,16 +27,3 @@ function Main(props) {
 
 export default Main;
 
-
-
-// {
-//     () => {
-//         for (let city in props.city) {
-//             return (
-//                 <a href='#'  onClick={choicedForDelete}>
-//                     <City city={city} />
-//                 </a>
-//             )
-//         }
-//     }
-// }

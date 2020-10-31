@@ -10,7 +10,7 @@ import './style.scss'
 function App() {
 
 
-    const [cities, setCity] = useState([
+    const [weather, setWeather] = useState([
         // {
         //     name: 'Москва',
         //     main: {
@@ -52,23 +52,17 @@ function App() {
         // }
     ])
 
-    const cache = []
+    const [city, setCity] = useState([])
 
-    function updateWeather(value) {
-        let weather = []
-        console.log(value, 'app', Date.now())
-        cache.push(value)
-        weather = (cache.pop())
-        console.log(weather, 'app')
-        setCity(cities.concat(weather))
-}
-    console.log(cities,'cities')
-return (
-    <Context.Provider>
-        <Header updateWeather={updateWeather} />
-        <Main city={cities} />
-    </Context.Provider>
-);
+    function updateCity(cityName) {
+        setCity(city.concat(cityName))
+    }
+    return (
+        <Context.Provider>
+            <Header addCity={updateCity} />
+            <Main weather={weather} />
+        </Context.Provider>
+    );
 }
 
 export default App;
