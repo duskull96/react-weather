@@ -1,25 +1,74 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import Header from './components/Header/Header'
+import Main from './components/Main/Main';
+import FetchData from './service/FetchData'
+import Context from './context'
+
+
+import './style.scss'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+    const [cities, setCity] = useState([
+        // {
+        //     name: 'Москва',
+        //     main: {
+        //         temp: 20,
+        //         feels_like: 17,
+        //         humidity: 60
+        //     },
+        //     dt: null,
+        //     weather: [{
+        //         description: 'солнечно',
+        //         icon: null
+        //     }]
+        // },
+        // {
+        //     name: 'Санкт-Петербург',
+        //     main: {
+        //         temp: 15,
+        //         feels_like: 10,
+        //         humidity: 91
+        //     },
+        //     dt: null,
+        //     weather: [{
+        //         description: 'дождь',
+        //         icon: null
+        //     }]
+        // },
+        // {
+        //     name: 'Новосибирск',
+        //     main: {
+        //         temp: 19,
+        //         feels_like: 15,
+        //         humidity: 76
+        //     },
+        //     dt: null,
+        //     weather: [{
+        //         description: 'пасмурно',
+        //         icon: null
+        //     }]
+        // }
+    ])
+
+    const cache = []
+
+    function updateWeather(value) {
+        let weather = []
+        console.log(value, 'app', Date.now())
+        cache.push(value)
+        weather = (cache.pop())
+        console.log(weather, 'app')
+        setCity(cities.concat(weather))
+}
+    console.log(cities,'cities')
+return (
+    <Context.Provider>
+        <Header updateWeather={updateWeather} />
+        <Main city={cities} />
+    </Context.Provider>
+);
 }
 
 export default App;
