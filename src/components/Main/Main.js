@@ -3,7 +3,7 @@ import City from '../City/City'
 
 import './main.scss'
 
-function Main(props) {
+function Main({ weather }) {
     function choicedForDelete(event) {
         event.preventDefault();
         const target = event.target.closest('a')
@@ -12,10 +12,10 @@ function Main(props) {
     return (
         <div className='container'>
 
-            {props.weather.map((weather, index) => {
+            {weather.map((weather, index) => {
                 return (
                     <a href='#' key={index} onClick={choicedForDelete}>
-                        <City city={weather} />
+                        <City weather={weather} />
                     </a>
                 )
             })}
