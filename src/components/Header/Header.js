@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 // import FetchData from '../../service/FetchData'
 import './header.scss'
 
+
 function useInputValue(defaultValue = '') {
     const [value, setValue] = useState(defaultValue)
-    
+
     return {
         bind: {
             value,
@@ -15,19 +16,21 @@ function useInputValue(defaultValue = '') {
     }
 }
 
-
 function Header({ addCity }) {
 
     const input = useInputValue('')
 
     function submitHandler(event) {
         event.preventDefault()
-        
+
         if (input.value().trim()) {
             addCity(input.value())
             input.clear()
         }
+    }
 
+    function writeCityForDelete() {
+        
     }
 
     return (
@@ -45,7 +48,10 @@ function Header({ addCity }) {
                         autoComplete='on'
                         {...input.bind}
                     />
-                    <button  type='submit'>Добавить</button>
+                    <div className='form__btns'>
+                        <button type='submit'>Добавить</button>
+                        <button className='delete__city' onClick={writeCityForDelete}>Удалить</button>
+                    </div>
                 </form>
             </div>
         </header>
