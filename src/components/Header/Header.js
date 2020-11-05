@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-// import FetchData from '../../service/FetchData'
+import {useChoiceCity} from '../City/ChoiceCityContext'
 import './header.scss'
 
 
 function useInputValue(defaultValue = '') {
+    
     const [value, setValue] = useState(defaultValue)
 
     return {
@@ -17,7 +18,7 @@ function useInputValue(defaultValue = '') {
 }
 
 function Header({ addCity }) {
-
+    const cityManager = useChoiceCity()
     const input = useInputValue('')
 
     function submitHandler(event) {
@@ -27,10 +28,6 @@ function Header({ addCity }) {
             addCity(input.value())
             input.clear()
         }
-    }
-
-    function writeCityForDelete() {
-        
     }
 
     return (
@@ -50,7 +47,7 @@ function Header({ addCity }) {
                     />
                     <div className='form__btns'>
                         <button type='submit'>Добавить</button>
-                        <button className='delete__city' onClick={writeCityForDelete}>Удалить</button>
+                        <button type='button' className='delete__city' onClick={cityManager.deleteChoicedCity}>Удалить</button>
                     </div>
                 </form>
             </div>

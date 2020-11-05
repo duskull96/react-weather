@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import Header from './components/Header/Header'
 import Main from './components/Main/Main';
-
+import {ChoiceCityProvider} from './components/City/ChoiceCityContext'
 import './style.scss'
+
 
 
 function App() {
@@ -11,6 +12,8 @@ function App() {
     const [weather, setWeather] = useState([])
 
     const [city, setCity] = useState([])
+
+    const [deleteCityConfirm, setDeleteCityConfirm] = useState(false)
 
     useEffect(() => {
         if (city.length) {
@@ -28,7 +31,7 @@ function App() {
                         setWeather(weather.concat([data]))
                     }, 0);
                 }
-
+                
             })
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -39,25 +42,37 @@ function App() {
         console.log(city, 'ather fetch');
         console.log(weather, 'fetch');
     }
+    
 
-    function deleteCity() {
+    // function deleteCity(choicedCity) {
+    //     console.log(choicedCity, deleteCityConfirm,  'app');
+    //     if (choicedCity && deleteCityConfirm) {
+    //         const newCity = city.filter(item => !choicedCity.includes(item))
+    //         const newWeather = weather.filter(item => !choicedCity.includes(item.name))
+    //         setCity(newCity)
+    //         setWeather(newWeather)
+    //         console.log(city,'удалили города');
+    //         setDeleteCityConfirm(false)
+    //     }
+    //     console.log('CityList',city,'DeleteList', choicedCity, deleteCityConfirm, 'app');
+    // }
         
-    }
+    
     console.log(city, 'city');
     console.log(weather, 'weather');
 
     return (
-        <>
-            <Header addCity={addCity} deleteCity={deleteCity}/>
+        <ChoiceCityProvider>
+            <Header addCity={addCity}/>
             {/* {city}
             {weather.length} */}
             {city.length ?
-                <Main weather={weather} />
+                <Main weather={weather}  />
                 : <br></br>}
             {/* {console.log(weather)}
             {JSON.stringify(weather, ' ', 2)} */}
             {/* {weather.lenght ? console.log(weather.forEach(weather.weather[0].icon)) : 'empty'} */}
-        </>
+        </ChoiceCityProvider>
     );
 }
 

@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
+import {useChoiceCity} from './ChoiceCityContext'
 
 import './city.scss'
 
 
 
 function City(props) {
+
+    const cityManager = useChoiceCity()
 
     const date = new Date(props.weather.dt * 1000)
     const options = {
@@ -29,12 +32,12 @@ function City(props) {
         icon.classList.toggle('choiced-for-delete-icon')
         target.classList.toggle('city-hover')
         
-        props.choiceCity(props.weather.name)
+        cityManager.choiceCity(props.weather.name)
     }
     return (
         <div className='city city-hover'>
             <div className="city__delete">
-                <a onClick={choicedForDelete}>
+                <a href='/' onClick={choicedForDelete}>
                 <img src="https://img.icons8.com/material/24/000000/delete-forever--v1.png" alt=''/>
                 </a>
             </div>
