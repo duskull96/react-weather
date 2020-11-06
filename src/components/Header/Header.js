@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import {useChoiceCity} from '../City/ChoiceCityContext'
+import { useChoiceCity } from '../City/ChoiceCityContext'
 import './header.scss'
 
 
 function useInputValue(defaultValue = '') {
-    
+
     const [value, setValue] = useState(defaultValue)
 
     return {
@@ -47,7 +47,7 @@ function Header({ addCity }) {
                     />
                     <div className='form__btns'>
                         <button type='submit'>Добавить</button>
-                        <button type='button' className='delete__city' onClick={cityManager.deleteChoicedCity}>Удалить</button>
+                        <button type='button' className='delete__city' onClick={cityManager.deleteChoisedCity}>Удалить</button>
                     </div>
                 </form>
             </div>
@@ -55,4 +55,4 @@ function Header({ addCity }) {
     );
 }
 
-export default Header
+export default Header;

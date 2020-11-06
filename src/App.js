@@ -1,73 +1,70 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Header from './components/Header/Header'
 import Main from './components/Main/Main';
-import {ChoiceCityProvider} from './components/City/ChoiceCityContext'
+import { ChoiceCityProvider } from './components/City/ChoiceCityContext'
 import './style.scss'
+import { useCityList } from './components/Context/CityListContext';
 
 
 
 function App() {
 
 
-    const [weather, setWeather] = useState([])
-
-    const [city, setCity] = useState([])
-
-    const [deleteCityConfirm, setDeleteCityConfirm] = useState(false)
+    const [city, setCity, weather, setWeather,fetchData,setFetchData] = useCityList()
 
     useEffect(() => {
         if (city.length) {
             let startUrl = 'http://api.openweathermap.org/data/2.5/weather?lang=ru&units=metric&appid=';
-        let apiKey = 'bbeb28bfc486dd19cca5f49278102700';
-        let url = startUrl + apiKey + '&q=' + city[city.length - 1];
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                if (data.cod === '404') {
-                    let currentCity = city.pop()
-                    return console.error(`'${currentCity}' города с таким названием не существует. Текст ошибки:`, data.message);
-                } else {
-                    setTimeout(() => {
-                        setWeather(weather.concat([data]))
-                    }, 0);
-                }
-                
-            })
+            let apiKey = 'bbeb28bfc486dd19cca5f49278102700';
+            let url = startUrl + apiKey + '&q=' + city[city.length - 1].name;
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.cod === '404') {
+                        // let currentCity = city
+                        // setCity(currentCity.slice(0, currentCity.length - 1))
+                        // return console.error(`'${currentCity[currentCity.length - 1]}' города с таким названием не существует. Текст ошибки:`, data.message);
+                    } else {
+                        setTimeout(() => {
+                            let newWeather = weather
+                            setWeather(newWeather.concat([data]))
+                            console.log(weather, 'получили погоду из фетч');
+                        }, 0);
+                    }
+
+                })
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [city])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [fetchData])
 
     function addCity(cityName) {
-        setCity(city.concat(cityName))
+        setFetchData(!fetchData)
+        setCity(() => [
+            ...city,
+            {
+                name: cityName,
+                selected: false
+            }
+        ])
+        // console.log(!city[0].name.length);
+        // if (city[0].name.length > 2) {
+        //     let newCity = city
+        //     setCity(newCity.slice(1))
+        // }
         console.log(city, 'ather fetch');
         console.log(weather, 'fetch');
     }
-    
 
-    // function deleteCity(choicedCity) {
-    //     console.log(choicedCity, deleteCityConfirm,  'app');
-    //     if (choicedCity && deleteCityConfirm) {
-    //         const newCity = city.filter(item => !choicedCity.includes(item))
-    //         const newWeather = weather.filter(item => !choicedCity.includes(item.name))
-    //         setCity(newCity)
-    //         setWeather(newWeather)
-    //         console.log(city,'удалили города');
-    //         setDeleteCityConfirm(false)
-    //     }
-    //     console.log('CityList',city,'DeleteList', choicedCity, deleteCityConfirm, 'app');
-    // }
-        
-    
     console.log(city, 'city');
     console.log(weather, 'weather');
 
     return (
         <ChoiceCityProvider>
-            <Header addCity={addCity}/>
+            <Header addCity={addCity} />
             {/* {city}
             {weather.length} */}
             {city.length ?
-                <Main weather={weather}  />
+                <Main weather={weather} />
                 : <br></br>}
             {/* {console.log(weather)}
             {JSON.stringify(weather, ' ', 2)} */}

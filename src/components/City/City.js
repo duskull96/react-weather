@@ -1,5 +1,6 @@
 import React from 'react'
-import {useChoiceCity} from './ChoiceCityContext'
+// import { useCityList } from '../Context/CityListContext'
+// import { useChoiceCity } from './ChoiceCityContext'
 
 import './city.scss'
 
@@ -7,7 +8,8 @@ import './city.scss'
 
 function City(props) {
 
-    const cityManager = useChoiceCity()
+    // const cityManager = useChoiceCity()
+    // const [city,setCity, weather, setWeather] = useCityList()
 
     const date = new Date(props.weather.dt * 1000)
     const options = {
@@ -20,25 +22,40 @@ function City(props) {
     const day = date.toLocaleString('ru', options)
     const weekday = date.toLocaleString('ru', { weekday: 'long' })
 
-    
+    // const classesCityBlock = ['city', 'city-hover']
+    // city.forEach( city => {
+    //     if (city.selected) {
+    //         classesCityBlock.push('choiced-for-delete')
+    //     }
+    // })
 
-    function choicedForDelete(event) {
+
+    function choisedForDelete(event) {
         event.preventDefault();
-        const target = event.target.closest('.city')
-        target.classList.toggle('choiced-for-delete')
-        
-        const icon = event.target.closest('.city__delete')
-        
-        icon.classList.toggle('choiced-for-delete-icon')
-        target.classList.toggle('city-hover')
-        
-        cityManager.choiceCity(props.weather.name)
+        // const target = event.target.closest('.city')
+        // target.classList.toggle('choiced-for-delete')
+        // target.classList.toggle('city-hover')
+
+        // const icon = event.target.closest('.city__delete')
+        // icon.classList.toggle('choiced-for-delete-icon')
+
+
+        // props.city.selected = !props.city.selected ? true : false
+        // // setCity(city)
+        // console.log(props.weather, 'props.weather');
+        // console.log(city, 'city');
+        // cityManager.choiceCity(props.weather.name)
+        props.choiceCity(props.weather.name)
+        console.log('=============================================');
     }
+
     return (
-        <div className='city city-hover'>
+
+        // <div className={props.city.selected ? 'city choiced-for-delete ' : 'city city-hover '}>
+        <div className='city city-hover '>
             <div className="city__delete">
-                <a href='/' onClick={choicedForDelete}>
-                <img src="https://img.icons8.com/material/24/000000/delete-forever--v1.png" alt=''/>
+                <a href='/' onClick={choisedForDelete}>
+                    <img src="https://img.icons8.com/material/24/000000/delete-forever--v1.png" alt='' />
                 </a>
             </div>
             <div className='city__title'>

@@ -1,34 +1,31 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import City from '../City/City'
+import { useCityList } from '../Context/CityListContext'
 
 import './main.scss'
 
-function Main({ weather , deleteCity}) {
-    // const [choicedCity, setChoicedCityCity] = useState([])
-    // function choiceCity(cityName) {
-    //     let replyId = choicedCity.findIndex( item => cityName === item)
-    //     if (replyId === -1) {
-    //         setChoicedCityCity(choicedCity.concat(cityName))
-    //     } else {
-    //         choicedCity.splice(replyId,1)
-    //         setChoicedCityCity(choicedCity)
-    //     }
-    // }
+function Main({ weather }) {
 
-    // useEffect( () => {
-    //     deleteCity(choicedCity)
-    //     console.log('effect');
-    // }, [choicedCity])
-
-    // console.log(choicedCity,'choicedCity')
+    const [city, setCity] = useCityList()
+    function choiceCity(cityNameFromWeather) {
+        setCity(
+            city.map(item => {
+                if (item.name === cityNameFromWeather) {
+                    item.selected = !item.selected
+                }
+                return item
+            })
+        )
+        console.log('Кукусики мы нажали на кнопку', cityNameFromWeather);
+    }
     return (
         <div className='container'>
-
             {weather.map((weather, index) => {
                 return (
-                        <City weather={weather} key={index}/>
+                    <City choiceCity={choiceCity} city={city[index]} weather={weather} key={Math.floor(Math.random() * 1000)} />
                 )
             })}
+            {console.log('RENDER MOTHERFUCKER ---------------------------------------')}
         </div>
     )
 };

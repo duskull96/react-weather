@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import { CityListProvider } from './components/Context/CityListContext';
 
 ReactDOM.render(
     <React.StrictMode>
-        <App />
+        <CityListProvider>
+            <App />
+        </CityListProvider>
     </React.StrictMode>,
     document.getElementById('root')
 );
