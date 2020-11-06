@@ -28,32 +28,19 @@ function City(props) {
     //         classesCityBlock.push('choiced-for-delete')
     //     }
     // })
-
+    console.log(props.city , 'props.city');
 
     function choisedForDelete(event) {
         event.preventDefault();
-        // const target = event.target.closest('.city')
-        // target.classList.toggle('choiced-for-delete')
-        // target.classList.toggle('city-hover')
-
-        // const icon = event.target.closest('.city__delete')
-        // icon.classList.toggle('choiced-for-delete-icon')
-
-
-        // props.city.selected = !props.city.selected ? true : false
-        // // setCity(city)
-        // console.log(props.weather, 'props.weather');
-        // console.log(city, 'city');
-        // cityManager.choiceCity(props.weather.name)
         props.choiceCity(props.weather.name)
         console.log('=============================================');
     }
 
     return (
 
-        // <div className={props.city.selected ? 'city choiced-for-delete ' : 'city city-hover '}>
-        <div className='city city-hover '>
-            <div className="city__delete">
+        <div className={'city ' + (props.city.selected ? 'choiced-for-delete ' : 'city-hover ')}>
+        {/* <div className='city city-hover '> */}
+            <div className={'city__delete ' + (props.city.selected ? 'choiced-for-delete-icon ' : '')}>
                 <a href='/' onClick={choisedForDelete}>
                     <img src="https://img.icons8.com/material/24/000000/delete-forever--v1.png" alt='' />
                 </a>

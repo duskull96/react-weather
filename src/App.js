@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react'
 import Header from './components/Header/Header'
-import Main from './components/Main/Main';
+import Main from './components/Main/Main'
 import { ChoiceCityProvider } from './components/City/ChoiceCityContext'
+import { useCityList } from './components/Context/CityListContext'
 import './style.scss'
-import { useCityList } from './components/Context/CityListContext';
+
 
 
 
 function App() {
 
 
-    const [city, setCity, weather, setWeather,fetchData,setFetchData] = useCityList()
+    const [city, setCity, weather, setWeather, fetchData, setFetchData] = useCityList()
 
     useEffect(() => {
         if (city.length) {
@@ -21,9 +22,9 @@ function App() {
                 .then(response => response.json())
                 .then(data => {
                     if (data.cod === '404') {
-                        // let currentCity = city
-                        // setCity(currentCity.slice(0, currentCity.length - 1))
-                        // return console.error(`'${currentCity[currentCity.length - 1]}' города с таким названием не существует. Текст ошибки:`, data.message);
+                        let currentCity = city
+                        setCity(currentCity.slice(0, currentCity.length - 1))
+                        return console.error(`'${currentCity[currentCity.length - 1].name}' города с таким названием не существует. Текст ошибки:`, data.message);
                     } else {
                         setTimeout(() => {
                             let newWeather = weather
@@ -38,14 +39,25 @@ function App() {
     }, [fetchData])
 
     function addCity(cityName) {
-        setFetchData(!fetchData)
-        setCity(() => [
-            ...city,
-            {
-                name: cityName,
-                selected: false
+        console.log(city, cityName, 'TEST');
+        let cityHasReply = false
+        city.forEach(item => {
+            if (item.name === cityName) {
+                cityHasReply = !cityHasReply
+                return console.error(`${cityName} - этот город уже есть списке.`)
             }
-        ])
+        })
+        if (!cityHasReply) {
+            setFetchData(!fetchData)
+            setCity(() => [
+                ...city,
+                {
+                    name: cityName,
+                    selected: false
+                }
+            ])
+        }
+
         // console.log(!city[0].name.length);
         // if (city[0].name.length > 2) {
         //     let newCity = city

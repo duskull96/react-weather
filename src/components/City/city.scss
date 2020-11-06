@@ -1,5 +1,7 @@
 @import '../../fonts.scss';
 
+
+
 .city-hover:hover {
     .city__delete {
         opacity: 100;
@@ -66,18 +68,26 @@
 
 .choiced-for-delete {
     animation: choicedForDeleteDiv 1s ease 0s infinite;
-    background-color: rgba(119, 119, 119, 0.25);
-    transition: .5s;
+    
 }
+
 @keyframes choicedForDeleteDiv {
     0% {
         transform: rotate(1deg);
+        background-color: rgba(119, 119, 119, 0.25);
+        transition: .5s;
     }
+
     50% {
         transform: rotate(-1deg);
+        background-color: rgba(119, 119, 119, 0.25);
+        transition: .5s;
     }
+
     100% {
         transform: rotate(1deg);
+        background-color: rgba(119, 119, 119, 0.25);
+        transition: .5s;
     }
 }
 
@@ -95,3 +105,4 @@
         opacity: 0;
     }
 }
+

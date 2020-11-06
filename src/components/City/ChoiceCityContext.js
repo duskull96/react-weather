@@ -13,6 +13,7 @@ export const ChoiceCityProvider = ({ children }) => {
     const [city, setCity, weather, setWeather] = useCityList()
 
     const [choisedCity, setChoisedCity] = useState([])
+
     const cityManager = {
         choiceCity: (cityName) => {
             let replyId = choisedCity.findIndex(item => cityName === item)
@@ -27,25 +28,31 @@ export const ChoiceCityProvider = ({ children }) => {
         }
         ,
         deleteChoisedCity: () => {
-            console.log(city, weather, setCity, setWeather);
             if (choisedCity.length) {
                 console.log('Удалили выбранные города - ', choisedCity);
                 const newCity = city
                 const newWeather = weather
+                const replyId = []
                 newCity.forEach((item, index) => {
-                    for (let i = 0; i < choisedCity.length; i++) {
-                        console.log(item.name, ' и ', choisedCity[i]);
+                    for (let i = 0; i < choisedCity.length + 1; i++) {
+                        console.log(item.name, ' и ', choisedCity[i])
                         if (item.name === choisedCity[i]) {
-                            newCity.splice(index, 1)
-                            newWeather.splice(index - 1, 1)
+                            replyId.push(index)
                         }
                     }
+                    console.log(replyId);
                 })
-                setCity(newCity)
-                setWeather(newWeather)
+                function remove(arr, ...indexes) {
+                    let set = new Set(indexes)
+                    return arr.filter((item,index) => !set.has(index))
+                }
+                console.log(replyId);
+                setCity(remove(newCity, ...replyId))
+                setWeather(remove(newWeather, ...replyId))
                 setChoisedCity([])
-            }
-        }
+            } else return console.error('Вы не выбрали ни одного города для удаления.')
+            
+        } 
     }
     console.log(choisedCity, 'choised list');
 

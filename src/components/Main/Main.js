@@ -1,17 +1,22 @@
 import React from 'react'
 import City from '../City/City'
 import { useCityList } from '../Context/CityListContext'
+import { useChoiceCity } from '../City/ChoiceCityContext'
 
 import './main.scss'
 
 function Main({ weather }) {
 
     const [city, setCity] = useCityList()
+
+    const cityManager = useChoiceCity()
+
     function choiceCity(cityNameFromWeather) {
         setCity(
             city.map(item => {
                 if (item.name === cityNameFromWeather) {
                     item.selected = !item.selected
+                    cityManager.choiceCity(item.name)
                 }
                 return item
             })
