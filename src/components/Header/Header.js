@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { useChoiceCity } from '../City/ChoiceCityContext'
+import { useCityList } from '../Context/CityListContext'
 import './header.scss'
 
 
 function useInputValue(defaultValue = '') {
-
+    
     const [value, setValue] = useState(defaultValue)
 
     return {
@@ -18,6 +19,8 @@ function useInputValue(defaultValue = '') {
 }
 
 function Header({ addCity }) {
+    let styles = {}
+    const [city] = useCityList()
     const cityManager = useChoiceCity()
     const input = useInputValue('')
 
@@ -30,8 +33,11 @@ function Header({ addCity }) {
         }
     }
 
+    city.length > 0 ? styles = {height: "40%"} : styles = {height: "100%"}
+    
     return (
-        <header className='header'>
+        <header style={styles} className='header'>
+            {console.log(styles)}
             <div className='__title'>
                 <h1>React Weather</h1>
                 <h3>введи название любого города мира</h3>

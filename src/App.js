@@ -3,9 +3,8 @@ import Header from './components/Header/Header'
 import Main from './components/Main/Main'
 import { ChoiceCityProvider } from './components/City/ChoiceCityContext'
 import { useCityList } from './components/Context/CityListContext'
+
 import './style.scss'
-
-
 
 
 function App() {
@@ -30,7 +29,7 @@ function App() {
                             let newWeather = weather
                             setWeather(newWeather.concat([data]))
                             console.log(weather, 'получили погоду из фетч');
-                        }, 0);
+                        }, 300);
                     }
 
                 })
@@ -77,10 +76,10 @@ function App() {
             {weather.length} */}
             {city.length ?
                 <Main weather={weather} />
-                : <br></br>}
+                : ''}
             {/* {console.log(weather)}
             {JSON.stringify(weather, ' ', 2)} */}
-            {/* {weather.lenght ? console.log(weather.forEach(weather.weather[0].icon)) : 'empty'} */}
+            {/* {weather.length ? console.log(weather.forEach(weather.weather[0].icon)) : 'empty'} */}
         </ChoiceCityProvider>
     );
 }

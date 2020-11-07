@@ -4,6 +4,7 @@ $ffExo: 'Exo 2', sans-serif;
 $ffJost: 'Jost', sans-serif;
 
 $fontColorDark: #2f2f2f;
+
 %cityName {
     font-family: $ffJost;
     font-weight: 900;
@@ -29,3 +30,55 @@ $fontColorDark: #2f2f2f;
     border: 3px solid $fontColorDark;
     border-radius: 20px;
 }   
+
+@media (max-width: 425px) {
+    %secondFont {
+        font-family: $ffExo;
+        font-weight: 500;
+        font-size: 17px;
+        color: $fontColorDark;
+    }
+    %cityName {
+        font-family: $ffJost;
+        font-weight: 900;
+        font-size: 25px;
+        color: $fontColorDark;
+    }
+    %descrptFont {
+        font-family: $ffExo;
+        font-weight: 500;
+        font-size: 13px;
+        color: $fontColorDark;
+    }
+    %inputStyle {
+        outline: none;
+        border: 2px solid $fontColorDark;
+        border-radius: 20px;
+    }   
+}
+
+@media (max-width: 375px) {
+    %secondFont {
+        font-family: $ffExo;
+        font-weight: 500;
+        font-size: 15px;
+        color: $fontColorDark;
+    }
+    %cityName {
+        font-family: $ffJost;
+        font-weight: 900;
+        font-size: 22px;
+        color: $fontColorDark;
+    }
+    %descrptFont {
+        font-family: $ffExo;
+        font-weight: 500;
+        font-size: 13px;
+        color: $fontColorDark;
+    }
+    %inputStyle {
+        outline: none;
+        border: 2px solid $fontColorDark;
+        border-radius: 20px;
+    }   
+}

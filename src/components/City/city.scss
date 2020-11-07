@@ -3,6 +3,7 @@
 
 
 .city-hover:hover {
+    transition: .5s;
     .city__delete {
         opacity: 100;
     } 
@@ -106,3 +107,59 @@
     }
 }
 
+
+@media (max-width: 425px) {
+
+    .city {
+        height: 150px;
+        width: 330px;
+        margin: 30px 0 0 0;
+        .city__delete{
+            left: 175px;
+
+        }
+        .city__icon {
+            width: 30%;
+        }
+        .city__info {
+            font-size: 15px;
+            & div {
+                & span {
+                    font-size: 20px;
+                    // @extend %cityName;
+                }
+            }
+            // @extend %descrptFont;
+        }
+        // @extend %inputStyle;
+    }
+
+}
+@media (max-width: 375px) {
+
+    .city {
+        height: 150px;
+        width: 280px;
+        margin: 20px 0 0 0;
+        padding: 10px;
+        .city__delete{
+            left: 140px;
+            top: 5px;
+        }
+        .city__icon {
+            width: 30%;
+        }
+        .city__info {
+            font-size: 15px;
+            & div {
+                & span {
+                    font-size: 19px;
+                    // @extend %cityName;
+                }
+            }
+            // @extend %descrptFont;
+        }
+        // @extend %inputStyle;
+    }
+
+}
