@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { CityListProvider } from './components/Context/CityListContext';
+import { CityListProvider } from './Context/CityListContext';
 
 ReactDOM.render(
     <React.StrictMode>
